@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>كاين منها</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid rgb(96, 103, 145);
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: rgb(192, 4, 183);
+      color: rgb(253, 254, 255);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: rgb(175, 10, 175);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>مرحباً بك! في موقع كشف الاميرات</h1>
+  <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
+  <button onclick="greet()">اضغط لتعرف</button>
+
+  <div id="result"></div>
+
+  <script>
+    function greet() {
+      const name = document.getElementById("nameInput").value.trim().toLowerCase();
+      const resultDiv = document.getElementById("result");
+
+      if (name === "") {
+        resultDiv.textContent = "الرجاء كتابة اسمك أولاً.";
+        return;
+      }
+
+      // الردود حسب الاسم
+      if (name === "نوارة") {
+        resultDiv.textContent = "انت اجمل اميرة و اجمل طبيبة يا نوارتي 🌸";
+      } else if (name === "عيشوش") {
+        resultDiv.textContent = "النحلة لي جابت العسل نوارة 👑";
+      } else if (name === "وسيم") {
+        resultDiv.textContent = "راك راجل احشم 💪";
+      } else {
+        resultDiv.textContent = "اسف لكن نوارة هي الاميرة الوحيدة ❤️";
+      }
+    }
+  </script>
+
+</body>
+</html>
