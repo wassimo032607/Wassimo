@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيادة النور والسرور | طبيبة العائلة</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #fff8fc, #e6f7ff);
+      color: #333;
+      line-height: 1.8;
+    }
+    header {
+      background: #d63384;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 2em;
+    }
+    header p {
+      font-size: 1em;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      background: #f9e3ef;
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: #d63384;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: url('https://cdn.pixabay.com/photo/2017/08/06/11/08/stethoscope-2598579_1280.jpg') center/cover no-repeat;
+      color: white;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+    .hero h2, .hero p {
+      position: relative;
+      z-index: 2;
+    }
+    section {
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .section-box {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h3 {
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      color: #777;
+      font-size: 0.9em;
+    }
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 30px;
+      text-align: center;
+      line-height: 55px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+      text-decoration: none;
+    }
+    iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+      border-radius: 10px;
+    }
+    .testimonial {
+      background: #fef0f5;
+      border-left: 5px solid #d63384;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    form input, form select, form textarea, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+    form button {
+      background: #d63384;
+      color: white;
+      font-weight: bold;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>عيادة النور والسرور</h1>
+    <p>طبيبة العائلة | د. قروش نور الهدى</p>
+  </header>  <nav>
+    <a href="#about">من نحن</a>
+    <a href="#services">الخدمات</a>
+    <a href="#booking">الحجز</a>
+    <a href="#gallery">الصور</a>
+    <a href="#testimonials">آراء المرضى</a>
+    <a href="#contact">التواصل</a>
+  </nav>  <div class="hero">
+    <h2>مرحبًا بكم في عيادتكم العائلية</h2>
+    <p>نعتني بصحتكم بابتسامة واحترافية</p>
+  </div>  <section id="about" class="section-box">
+    <h3>من نحن</h3>
+    <p>عيادة النور والسرور، بإشراف الدكتورة قروش نور الهدى، تقدم رعاية طبية متكاملة لكافة أفراد العائلة، في بيئة إنسانية، دافئة ومريحة.</p>
+  </section>  <section id="services" class="section-box">
+    <h3>الخدمات</h3>
+    <ul>
+      <li>استشارات طبية عامة</li><li>متابعة الامراض المزمنة</li>
+      <li>رعاية الأم والطفل</li>
+      <li>خدمات نفسية للامومة</li>
+      <li>تحاليل وقياسات صحية بالتعاون مع مخابر موثوقة</li>
+    </ul>
+  </section>  <section id="booking" class="section-box">
+    <h3>احجز موعدًا</h3>
+    <form>
+      <input type="text" placeholder="الاسم الكامل" required>
+      <input type="tel" placeholder="رقم الهاتف" required>
+      <input type="date" required>
+      <select required>
+        <option value="">اختر نوع الخدمة</option>
+        <option>استشارة طبية</option>
+        <option>فحص شامل</option>
+        <option>دعم الامومة</option>
+      </select>
+      <textarea placeholder="ملاحظات إضافية (اختياري)"></textarea>
+      <button type="submit">إرسال الطلب</button>
+    </form>
+  </section>  <section id="gallery" class="section-box gallery">
+    <h3>صور من العيادة</h3>
+    <img src="https://cdn.pixabay.com/photo/2016/11/29/04/18/doctor-1867756_1280.jpg" alt="العيادة">
+    <img src="https://cdn.pixabay.com/photo/2017/08/06/11/05/hospital-2598569_1280.jpg" alt="قاعة الانتظار">
+  </section>  <section id="testimonials" class="section-box">
+    <h3>آراء المرضى</h3>
+    <div class="testimonial">"دكتورة مميزة، تعامل راقٍ وخدمة ممتازة. أنصح بها بشدة!"</div>
+    <div class="testimonial">"العيادة نظيفة والدكتورة صبورة وتفهم الحالة جيدًا. تجربة رائعة."</div>
+  </section>  <section id="contact" class="section-box">
+    <h3>معلومات التواصل</h3>
+    <p>📞 الهاتف: 0550 13 456</p>
+    <p>📍 العنوان: بن عكنون، الجزائر العاصمة، الجزائر</p>
+    <p>📧 البريد الإلكتروني: alnoor.clinic@email.com</p>
+    <br>
+    <iframe src="https://maps.google.com/maps?q=algiers&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+  </section><a class="whatsapp" href="https://wa.me/213550123456" target="_blank" title="تواصل عبر واتساب">💬</a>
+
+  <footer>
+    &copy; 2029 عيادة النور والسرور - جميع الحقوق محفوظة
+  </footer>
+</body>
+</html>
