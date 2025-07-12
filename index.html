@@ -78,8 +78,7 @@
       to { opacity: 1; transform: scale(1); }
     }
     ul { list-style: none; padding: 0; text-align: right; }
-    ul li { margin-bottom: 10px; font-size: 15px; }/* نافذة انقطاع الإنترنت */
-#offline-alert {
+    ul li { margin-bottom: 10px; font-size: 15px; }#offline-alert {
   position: fixed;
   top: 0;
   left: 0;
@@ -92,10 +91,26 @@
   z-index: 9999;
   display: none;
 }
+#overlay-blocker {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
 
   </style>
 </head>
-<body>  <div id="offline-alert">🚫 تم فقد الاتصال بالإنترنت. الرجاء التأكد من الشبكة.</div>  <div class="container">
+<body>  <div id="offline-alert">🚫 تم فقد الاتصال بالإنترنت. الرجاء التأكد من الشبكة.</div>
+  <div id="overlay-blocker">⚠️ لا يمكن الاستمرار بدون اتصال بالإنترنت</div>  <div class="container">
     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
       <img src="https://cdn-icons-png.flaticon.com/512/2881/2881037.png" alt="DNA Logo" width="40">
       <h1 style="margin: 0; font-size: 20px;">معهد بيشلاغن للعلوم الطبية</h1>
@@ -171,6 +186,7 @@
     const confirmPage = document.getElementById("confirm-page");
     const countrySelect = document.getElementById("country");
     const offlineAlert = document.getElementById("offline-alert");
+    const overlayBlocker = document.getElementById("overlay-blocker");
 
     const blockedCountries = ["الجزائر", "تونس", "المغرب", "ليبيا", "موريتانيا", "مصر", "السودان"];
     let savedData = {};
@@ -240,12 +256,13 @@
       thankYouMsg.classList.add("show");
     }
 
-    // مراقبة حالة الاتصال بالإنترنت
     function updateOnlineStatus() {
       if (!navigator.onLine) {
         offlineAlert.style.display = 'block';
+        overlayBlocker.style.display = 'flex';
       } else {
         offlineAlert.style.display = 'none';
+        overlayBlocker.style.display = 'none';
       }
     }
     window.addEventListener('online', updateOnlineStatus);
