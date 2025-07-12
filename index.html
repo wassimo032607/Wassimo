@@ -78,10 +78,24 @@
       to { opacity: 1; transform: scale(1); }
     }
     ul { list-style: none; padding: 0; text-align: right; }
-    ul li { margin-bottom: 10px; font-size: 15px; }
+    ul li { margin-bottom: 10px; font-size: 15px; }/* نافذة انقطاع الإنترنت */
+#offline-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: crimson;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  z-index: 9999;
+  display: none;
+}
+
   </style>
 </head>
-<body>  <div class="container">
+<body>  <div id="offline-alert">🚫 تم فقد الاتصال بالإنترنت. الرجاء التأكد من الشبكة.</div>  <div class="container">
     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
       <img src="https://cdn-icons-png.flaticon.com/512/2881/2881037.png" alt="DNA Logo" width="40">
       <h1 style="margin: 0; font-size: 20px;">معهد بيشلاغن للعلوم الطبية</h1>
@@ -120,9 +134,7 @@
   </div>
 
   <button class="submit-btn" id="registerBtn">تسجيل</button>
-  <div class="footer">
-  تم التصميم بواسطة Harouz wassim
-  </div>
+  <div class="footer">مصمم بواسطة Visme Forms</div>
 </div>
 
 <!-- صفحة التأكيد -->
@@ -158,6 +170,7 @@
     const thankYouMsg = document.getElementById("thank-you");
     const confirmPage = document.getElementById("confirm-page");
     const countrySelect = document.getElementById("country");
+    const offlineAlert = document.getElementById("offline-alert");
 
     const blockedCountries = ["الجزائر", "تونس", "المغرب", "ليبيا", "موريتانيا", "مصر", "السودان"];
     let savedData = {};
@@ -226,5 +239,17 @@
       confirmPage.classList.remove("show");
       thankYouMsg.classList.add("show");
     }
+
+    // مراقبة حالة الاتصال بالإنترنت
+    function updateOnlineStatus() {
+      if (!navigator.onLine) {
+        offlineAlert.style.display = 'block';
+      } else {
+        offlineAlert.style.display = 'none';
+      }
+    }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    updateOnlineStatus();
   </script></body>
 </html>
