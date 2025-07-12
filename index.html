@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>نموذج التسجيل</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .3);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .container img.logo {
+      width: 150px;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    h2 { color: #333; margin-bottom: 10px; }
+    h1 { color: #222; font-size: 22px; margin-bottom: 10px; }
+    p { font-size: 14px; color: #666; margin-bottom: 20px; }
+    .form-group { margin-bottom: 15px; text-align: left; }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: .3s;
+    }
+    input:focus, select:focus {
+      border-color: #764ba2;
+      outline: none;
+      box-shadow: 0 0 5px #764ba2;
+    }
+    select.valid {
+      color: green;
+      font-weight: bold;
+    }
+    select.invalid {
+      color: red;
+      font-weight: bold;
+    }
+    .submit-btn, .back-btn {
+      background: #764ba2;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .submit-btn:hover, .back-btn:hover { background: #5a3f8c; }
+    .footer { font-size: 12px; color: #aaa; margin-top: 15px; }
+    .message { display: none; animation: fadeIn .7s ease; }
+    .message.show { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    ul { list-style: none; padding: 0; text-align: right; }
+    ul li { margin-bottom: 10px; font-size: 15px; }
+  </style>
+</head>
+<body>  <div class="container">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
+      <img src="https://cdn-icons-png.flaticon.com/512/2881/2881037.png" alt="DNA Logo" width="40">
+      <h1 style="margin: 0; font-size: 20px;">معهد بيشلاغن للعلوم الطبية</h1>
+    </div><img class="logo" src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="شخصية">
+
+<!-- نموذج التسجيل -->
+<div id="form-content">
+  <h2>سجّل الآن</h2>
+  <p>احجز مكانك في الندوة المجانية القادمة</p>
+
+  <div class="form-group">
+    <input type="text" id="name" placeholder="الاسم الكامل *">
+  </div>
+  <div class="form-group">
+    <input type="text" id="surname" placeholder="اللقب *">
+  </div>
+  <div class="form-group">
+    <input type="email" id="email" placeholder="البريد الإلكتروني *">
+  </div>
+  <div class="form-group">
+    <select id="country">
+      <option value="">اختر الدولة *</option>
+      <option value="الجزائر">الجزائر</option>
+      <option value="تونس">تونس</option>
+      <option value="المغرب">المغرب</option>
+      <option value="ليبيا">ليبيا</option>
+      <option value="موريتانيا">موريتانيا</option>
+      <option value="مصر">مصر</option>
+      <option value="السودان">السودان</option>
+      <option value="السعودية">السعودية</option>
+      <option value="الإمارات">الإمارات</option>
+      <option value="فرنسا">فرنسا</option>
+      <option value="ألمانيا">ألمانيا</option>
+      <option value="أمريكا">الولايات المتحدة</option>
+    </select>
+  </div>
+
+  <button class="submit-btn" id="registerBtn">تسجيل</button>
+  <div class="footer">
+  تم التصميم بواسطة Harouz wassim
+  </div>
+</div>
+
+<!-- صفحة التأكيد -->
+<div id="confirm-page" class="message">
+  <h2>📋 تأكيد المعلومات</h2>
+  <ul>
+    <li><strong>الاسم:</strong> <span id="c-name"></span></li>
+    <li><strong>اللقب:</strong> <span id="c-surname"></span></li>
+    <li><strong>البريد الإلكتروني:</strong> <span id="c-email"></span></li>
+    <li><strong>الدولة:</strong> <span id="c-country"></span></li>
+  </ul>
+  <button class="submit-btn" onclick="submitConfirmed()">✅ المعلومات صحيحة</button>
+  <button class="back-btn" onclick="goBack()">🔁 تعديل المعلومات</button>
+</div>
+
+<!-- صفحة الشكر -->
+<div id="thank-you" class="message">
+  <h2>✅ شكراً لك!</h2>
+  <p>تم تسجيلك بنجاح وسيتم معالجة طلبك قريباً.</p>
+</div>
+
+<!-- صفحة الخطأ -->
+<div id="error-msg" class="message">
+  <h2>🚫 للأسف</h2>
+  <p id="error-text">حدث خطأ ما. الرجاء التأكد من البيانات.</p>
+  <button class="back-btn" onclick="goBack()">🔁 الرجوع إلى التسجيل</button>
+</div>
+
+  </div>  <script>
+    const formContent = document.getElementById("form-content");
+    const errorMsg = document.getElementById("error-msg");
+    const errorText = document.getElementById("error-text");
+    const thankYouMsg = document.getElementById("thank-you");
+    const confirmPage = document.getElementById("confirm-page");
+    const countrySelect = document.getElementById("country");
+
+    const blockedCountries = ["الجزائر", "تونس", "المغرب", "ليبيا", "موريتانيا", "مصر", "السودان"];
+    let savedData = {};
+
+    document.getElementById("registerBtn").addEventListener("click", function () {
+      const name = document.getElementById("name").value.trim();
+      const surname = document.getElementById("surname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const country = countrySelect.value;
+
+      const emailValid = email.includes("@") && email.includes(".");
+      const isBlocked = blockedCountries.includes(country);
+
+      if (name === "" || surname === "" || email === "" || country === "") {
+        showError("الرجاء إكمال جميع الحقول المطلوبة.");
+      } else if (!emailValid) {
+        showError("البريد الإلكتروني غير صالح. تأكد من أنه يحتوي على @ و .");
+      } else if (isBlocked) {
+        showError("❌ دولتك غير مدعومة حالياً. سيتم دعمها قريباً.");
+      } else {
+        savedData = { name, surname, email, country };
+        showConfirmation(savedData);
+      }
+    });
+
+    countrySelect.addEventListener("change", function () {
+      const selected = countrySelect.value;
+      if (blockedCountries.includes(selected)) {
+        countrySelect.classList.remove("valid");
+        countrySelect.classList.add("invalid");
+      } else if (selected !== "") {
+        countrySelect.classList.remove("invalid");
+        countrySelect.classList.add("valid");
+      } else {
+        countrySelect.classList.remove("valid", "invalid");
+      }
+    });
+
+    function showError(msg) {
+      formContent.style.display = "none";
+      confirmPage.classList.remove("show");
+      thankYouMsg.classList.remove("show");
+      errorText.textContent = msg;
+      errorMsg.classList.add("show");
+    }
+
+    function showConfirmation(data) {
+      document.getElementById("c-name").textContent = data.name;
+      document.getElementById("c-surname").textContent = data.surname;
+      document.getElementById("c-email").textContent = data.email;
+      document.getElementById("c-country").textContent = data.country;
+      formContent.style.display = "none";
+      errorMsg.classList.remove("show");
+      thankYouMsg.classList.remove("show");
+      confirmPage.classList.add("show");
+    }
+
+    function goBack() {
+      confirmPage.classList.remove("show");
+      errorMsg.classList.remove("show");
+      thankYouMsg.classList.remove("show");
+      formContent.style.display = "block";
+    }
+
+    function submitConfirmed() {
+      confirmPage.classList.remove("show");
+      thankYouMsg.classList.add("show");
+    }
+  </script></body>
+</html>
