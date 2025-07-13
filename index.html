@@ -22,15 +22,11 @@
     header h1 { font-size: 3em; margin: 0; }
     header p { font-size: 1.2em; margin-top: 10px; color: #ffe0b3; }
 
-    #tableSelect {
+    #free-water {
       text-align: center;
+      color: green;
+      font-weight: bold;
       margin: 20px 0;
-    }
-    select {
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1em;
     }
 
     .products {
@@ -83,11 +79,20 @@
       border-radius: 5px;
     }
 
-    #finalize {
+    #order-controls {
       text-align: center;
       margin: 30px 0;
     }
-    #finalize button {
+
+    #order-controls select {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+
+    #order-controls button {
       padding: 12px 30px;
       font-size: 1.1em;
       background-color: #5d3a1a;
@@ -95,13 +100,6 @@
       border: none;
       border-radius: 25px;
       cursor: pointer;
-    }
-
-    #free-water {
-      text-align: center;
-      color: green;
-      font-weight: bold;
-      margin-bottom: 20px;
     }
 
     #thankYou {
@@ -135,21 +133,10 @@
     <p>اختر منتجاتك وسنوصّلها إلى طاولتك!</p>
   </header>
 
-  <div id="tableSelect">
-    <label for="table">اختر رقم الطاولة:</label>
-    <select id="table">
-      <option disabled selected>اختر طاولة</option>
-      <script>
-        for (let i = 1; i <= 15; i++) {
-          document.write(`<option value="${i}">${i}</option>`);
-        }
-      </script>
-    </select>
-  </div>
-
   <div id="free-water">💧 إذا تجاوز طلبك 1000DA فالمياه تصبح مجانية!</div>
 
   <section class="products" id="menu">
+    <!-- المنتجات -->
     <div class="product">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlC5uw4R9KYlSMSUMU3CDulqNx6Yd6-za3eP_zRmP2W2fTX9Ee3tRfM20&s=10" alt="قهوة">
       <div class="product-content">
@@ -221,7 +208,15 @@
     </div>
   </section>
 
-  <div id="finalize">
+  <div id="order-controls">
+    <select id="table">
+      <option disabled selected>اختر رقم الطاولة</option>
+      <script>
+        for (let i = 1; i <= 15; i++) {
+          document.write(`<option value="${i}">${i}</option>`);
+        }
+      </script>
+    </select><br/>
     <button onclick="finalizeOrder()">إنهاء الطلب</button>
   </div>
 
@@ -262,7 +257,6 @@
       const order = [];
       let tempTotal = 0;
 
-      // حساب المجموع قبل احتساب خصم المياه
       products.forEach(product => {
         const qty = parseInt(document.getElementById(product.qtyId).value);
         if (qty > 0) {
@@ -277,8 +271,7 @@
       }
 
       document.getElementById('menu').style.display = 'none';
-      document.getElementById('tableSelect').style.display = 'none';
-      document.getElementById('finalize').style.display = 'none';
+      document.getElementById('order-controls').style.display = 'none';
       document.getElementById('thankYou').style.display = 'block';
 
       let invoiceHTML = `<h3>رقم الطاولة: ${table}</h3><ul style='list-style:none;padding:0;'>`;
