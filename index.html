@@ -1,215 +1,164 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>الباحث عن شريكة الحياة</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>المبرمج في عطلة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Cairo', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      margin: 0;
-      background: linear-gradient(to right, #f1f1f1, #e0f7fa);
-      direction: rtl;
-    }
-
-    header {
-      background: linear-gradient(to left, #009688, #00796b);
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       color: white;
-      padding: 20px;
       text-align: center;
-      font-size: 24px;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1s ease;
-    }
-
-    h2 {
-      text-align: center;
-      color: #009688;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 15px;
-    }
-
-    .input-group {
       position: relative;
-      margin-bottom: 15px;
+      padding: 20px;
     }
 
-    .input-group i {
+    .language-switcher {
       position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #009688;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    input, select {
-      width: 100%;
-      padding: 12px 40px 12px 12px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background: linear-gradient(to left, #009688, #00796b);
-      color: white;
-      padding: 14px;
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      background: linear-gradient(to left, #00796b, #004d40);
-      transform: scale(1.02);
-    }
-
-    /* النتيجة */
-    .result {
-      display: none;
-      text-align: center;
-      padding: 30px;
-      animation: fadeIn 1s ease;
-    }
-
-    .result img {
-      width: 100%;
-      max-width: 350px;
+    .language-switcher button {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid #00ffe0;
+      padding: 6px 12px;
       border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      margin-bottom: 20px;
-    }
-
-    .result h2 {
-      color: #00796b;
-    }
-
-    .result p {
-      font-size: 18px;
-      color: #444;
-      margin-bottom: 20px;
-    }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #009688;
-      color: white;
-      border-radius: 10px;
-      text-decoration: none;
       cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
     }
 
-    .back-btn:hover {
-      background-color: #00796b;
+    .language-switcher button:hover {
+      background: #00ffe0;
+      color: #000;
+    }
+
+    h1, p {
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+      text-shadow: 0 0 15px #00ffe0, 0 0 25px #00c3ff;
+      z-index: 2;
+    }
+
+    h1 { font-size: 2.6em; animation-delay: 0.3s; }
+    p {
+      font-size: 1.3em;
+      margin-top: 15px;
+      color: #dddddd;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+      animation-delay: 1s;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 22px;
+      animation: floatUp ease-in forwards;
+      pointer-events: none;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 4px white);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      p { font-size: 1em; }
+      .language-switcher { top: 10px; left: 10px; }
     }
   </style>
 </head>
 <body>
+  <div class="language-switcher">
+    <button onclick="switchLanguage('ar')">العربية</button>
+    <button onclick="switchLanguage('fr')">Français</button>
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('es')">Español</button>
+  </div>
 
-<header>الباحث عن شريكة الحياة 💍</header>
+  <h1 id="main-text">المبرمج في عطلة حتى 20 جويلية 👨‍💻</h1>
+  <p id="sub-text">🎧 نتمنى لك يومًا شبابيا جميلاً ومليئًا بالطاقة 😎</p>
 
-<!-- قسم النموذج -->
-<div class="container" id="formSection">
-  <h2>حدد المواصفات التي ترغب بها</h2>
-  <form id="wifeForm">
-    <div class="input-group">
-      <label>العمر المطلوب:</label>
-      <i class="fas fa-birthday-cake"></i>
-      <input type="number" id="age" placeholder="مثلاً: 25">
-    </div>
+  <script>
+    const translations = {
+      ar: {
+        title: "المبرمج في عطلة حتى 20 جويلية 👨‍💻",
+        message: "🎧 نتمنى لك يومًا شبابيا جميلاً ومليئًا بالطاقة 😎",
+        dir: "rtl",
+        lang: "ar"
+      },
+      fr: {
+        title: "Le programmeur est en vacances jusqu'au 20 juillet 👨‍💻",
+        message: "🎧 Passez une journée pleine d’énergie et de jeunesse 😎",
+        dir: "ltr",
+        lang: "fr"
+      },
+      en: {
+        title: "The programmer is on vacation until July 20 👨‍💻",
+        message: "🎧 Wishing you a youthful and energetic day 😎",
+        dir: "ltr",
+        lang: "en"
+      },
+      tr: {
+        title: "Yazılımcı 20 Temmuz'a kadar tatilde 👨‍💻",
+        message: "🎧 Genç ve enerjik bir gün geçirmeni dileriz 😎",
+        dir: "ltr",
+        lang: "tr"
+      },
+      es: {
+        title: "El programador está de vacaciones hasta el 20 de julio 👨‍💻",
+        message: "🎧 ¡Que tengas un día lleno de juventud y energía! 😎",
+        dir: "ltr",
+        lang: "es"
+      }
+    };
 
-    <div class="input-group">
-      <label>الطول (سم):</label>
-      <i class="fas fa-ruler-vertical"></i>
-      <input type="number" id="height" placeholder="مثلاً: 165">
-    </div>
+    function switchLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById('main-text').textContent = t.title;
+      document.getElementById('sub-text').textContent = t.message;
+      document.documentElement.lang = t.lang;
+      document.documentElement.dir = t.dir;
+    }
 
-    <div class="input-group">
-      <label>لون البشرة:</label>
-      <i class="fas fa-palette"></i>
-      <select id="skin">
-        <option>بيضاء</option>
-        <option>قمحية</option>
-        <option>سمراء</option>
-        <option>أي لون</option>
-      </select>
-    </div>
+    const emojis = ["😎", "🎧", "🚀", "🔥", "🧠", "💻", "☀️"];
+    function createEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.bottom = "0px";
+      emoji.style.fontSize = (Math.random() * 10 + 20) + "px";
+      emoji.style.animationDuration = (Math.random() * 2 + 4) + "s";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
+    }
 
-    <div class="input-group">
-      <label>المستوى الديني:</label>
-      <i class="fas fa-mosque"></i>
-      <select id="religion">
-        <option>محجبة ومصلية</option>
-        <option>مصلية فقط</option>
-        <option>محافظة</option>
-        <option>لا يهم</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label>مستوى التعليم:</label>
-      <i class="fas fa-graduation-cap"></i>
-      <select id="education">
-        <option>جامعية</option>
-        <option>ثانوية</option>
-        <option>متوسطة</option>
-        <option>لا يهم</option>
-      </select>
-    </div>
-
-    <button type="button" onclick="showResult()">🔍 ابحث الآن</button>
-  </form>
-</div>
-
-<!-- قسم النتيجة -->
-<div class="container result" id="resultSection">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaZuD74zPEGpK2Dnlz8wg6EOvNt_fPKhAUeJ8oQEWUOCLtJ3okcpewvc&s=10" alt="دنيا سطايفية">
-  <h2>دنيا سطايفية</h2>
-  <p>بنت الفاميليا، ذات خلق ودين 👰🏻<br>مطابقة تمامًا لاختياراتك!</p>
-  <span class="back-btn" onclick="goBack()">🔙 رجوع للاختيار</span>
-</div>
-
-<script>
-  function showResult() {
-    document.getElementById("formSection").style.display = "none";
-    document.getElementById("resultSection").style.display = "block";
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function goBack() {
-    document.getElementById("resultSection").style.display = "none";
-    document.getElementById("formSection").style.display = "block";
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
-
+    setInterval(createEmoji, 400);
+  </script>
 </body>
 </html>
