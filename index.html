@@ -1,168 +1,215 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>وسيم متوقف حالياً</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>الباحث عن شريكة الحياة</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
     }
 
     body {
-      font-family: 'Cairo', sans-serif;
-      background: radial-gradient(circle at center, #1a1a1a, #000000);
-      overflow: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
+      background: linear-gradient(to right, #f1f1f1, #e0f7fa);
+      direction: rtl;
+    }
+
+    header {
+      background: linear-gradient(to left, #009688, #00796b);
+      color: white;
       padding: 20px;
-      color: #fff;
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(130deg, #00ffe0, #ff00e6, #00ffe0);
-      background-size: 600% 600%;
-      animation: pulseBG 10s ease infinite;
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    @keyframes pulseBG {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    h1, p {
-      z-index: 1;
       text-align: center;
-      text-shadow: 0 0 15px #ff00c8, 0 0 25px #00ffe0;
-      animation: fadeIn 2s ease forwards;
-      opacity: 0;
+      font-size: 24px;
     }
 
-    h1 {
-      font-size: 2.5em;
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      color: #009688;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    .input-group {
+      position: relative;
       margin-bottom: 15px;
-      animation-delay: 0.5s;
     }
 
-    p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-      animation-delay: 1.2s;
+    .input-group i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #009688;
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
+    input, select {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
     }
 
     button {
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid #00ffe0;
-      color: #ffffff;
-      padding: 12px 28px;
-      font-size: 1em;
-      border-radius: 30px;
+      background: linear-gradient(to left, #009688, #00796b);
+      color: white;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
       cursor: pointer;
+      margin-top: 20px;
       transition: 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 2s;
-      opacity: 0;
     }
 
     button:hover {
-      background: rgba(0, 255, 224, 0.2);
-      box-shadow: 0 0 15px #00ffe0, 0 0 30px #ff00e6;
-      transform: scale(1.05);
+      background: linear-gradient(to left, #00796b, #004d40);
+      transform: scale(1.02);
     }
 
-    button::after {
-      content: '';
-      position: absolute;
-      width: 300%;
-      height: 300%;
-      top: 50%;
-      left: 50%;
-      background: radial-gradient(circle, #ffffff33, transparent 60%);
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      transition: 0.6s;
-      border-radius: 50%;
-      z-index: -1;
+    /* النتيجة */
+    .result {
+      display: none;
+      text-align: center;
+      padding: 30px;
+      animation: fadeIn 1s ease;
     }
 
-    button:active::after {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
+    .result img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
     }
 
-    .emoji {
-      position: absolute;
-      font-size: 24px;
-      animation: floatUp linear forwards;
-      pointer-events: none;
-      opacity: 0.8;
-      filter: drop-shadow(0 0 5px white);
+    .result h2 {
+      color: #00796b;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) scale(1.6);
-        opacity: 0;
-      }
+    .result p {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 20px;
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      p { font-size: 1.1em; }
-      button { font-size: 0.9em; padding: 10px 22px; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #009688;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background-color: #00796b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>🚧 وسيم متوقف حالياً عن نشر المشاريع 🚧</h1>
-  <p>📢 سنعلمكم حالما يعود للنشر بإذن الله</p>
-  <button onclick="alert('تم تسجيل رغبتك! سنعلمك عند عودة وسيم ❤️')">🔔 إشعارني عند العودة</button>
 
-  <script>
-    const emojis = ["❤️", "🙏", "🌟", "💖"];
-    function createEmoji() {
-      const emoji = document.createElement("div");
-      emoji.className = "emoji";
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      emoji.style.left = Math.random() * 100 + "vw";
-      emoji.style.bottom = "0px";
-      emoji.style.fontSize = (Math.random() * 20 + 20) + "px";
-      emoji.style.animationDuration = (Math.random() * 3 + 3) + "s";
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 6000);
-    }
-    setInterval(createEmoji, 200);
-  </script>
+<header>الباحث عن شريكة الحياة 💍</header>
+
+<!-- قسم النموذج -->
+<div class="container" id="formSection">
+  <h2>حدد المواصفات التي ترغب بها</h2>
+  <form id="wifeForm">
+    <div class="input-group">
+      <label>العمر المطلوب:</label>
+      <i class="fas fa-birthday-cake"></i>
+      <input type="number" id="age" placeholder="مثلاً: 25">
+    </div>
+
+    <div class="input-group">
+      <label>الطول (سم):</label>
+      <i class="fas fa-ruler-vertical"></i>
+      <input type="number" id="height" placeholder="مثلاً: 165">
+    </div>
+
+    <div class="input-group">
+      <label>لون البشرة:</label>
+      <i class="fas fa-palette"></i>
+      <select id="skin">
+        <option>بيضاء</option>
+        <option>قمحية</option>
+        <option>سمراء</option>
+        <option>أي لون</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>المستوى الديني:</label>
+      <i class="fas fa-mosque"></i>
+      <select id="religion">
+        <option>محجبة ومصلية</option>
+        <option>مصلية فقط</option>
+        <option>محافظة</option>
+        <option>لا يهم</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>مستوى التعليم:</label>
+      <i class="fas fa-graduation-cap"></i>
+      <select id="education">
+        <option>جامعية</option>
+        <option>ثانوية</option>
+        <option>متوسطة</option>
+        <option>لا يهم</option>
+      </select>
+    </div>
+
+    <button type="button" onclick="showResult()">🔍 ابحث الآن</button>
+  </form>
+</div>
+
+<!-- قسم النتيجة -->
+<div class="container result" id="resultSection">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaZuD74zPEGpK2Dnlz8wg6EOvNt_fPKhAUeJ8oQEWUOCLtJ3okcpewvc&s=10" alt="دنيا سطايفية">
+  <h2>دنيا سطايفية</h2>
+  <p>بنت الفاميليا، ذات خلق ودين 👰🏻<br>مطابقة تمامًا لاختياراتك!</p>
+  <span class="back-btn" onclick="goBack()">🔙 رجوع للاختيار</span>
+</div>
+
+<script>
+  function showResult() {
+    document.getElementById("formSection").style.display = "none";
+    document.getElementById("resultSection").style.display = "block";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack() {
+    document.getElementById("resultSection").style.display = "none";
+    document.getElementById("formSection").style.display = "block";
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
 </body>
 </html>
