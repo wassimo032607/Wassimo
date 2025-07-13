@@ -3,162 +3,306 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>المبرمج في عطلة</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;800&display=swap" rel="stylesheet">
+  <title>مقهى الأصيل - الطلب</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    * { box-sizing: border-box; }
     body {
+      margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      min-height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(to bottom, #f9f4ef, #fdfaf6);
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #5d3a1a, #8B4513);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    header h1 { font-size: 3em; margin: 0; }
+    header p { font-size: 1.2em; margin-top: 10px; color: #ffe0b3; }
+
+    #tableSelect {
+      text-align: center;
+      margin: 20px 0;
+    }
+    select {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 30px;
+      padding: 20px 30px 60px;
+    }
+    .product {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      position: relative;
       padding: 20px;
     }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .product-content h3 { margin: 15px 0 5px; color: #5d3a1a; }
+    .product-content p { color: #666; }
+    .price { margin-top: 10px; font-weight: bold; color: #8B4513; }
 
-    .language-switcher {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
+    .quantity {
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
+      margin-top: 10px;
     }
-
-    .language-switcher button {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      border: 1px solid #00ffe0;
-      padding: 6px 12px;
-      border-radius: 20px;
+    .quantity button {
+      background-color: #8B4513;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      font-size: 1.2em;
+      border-radius: 5px;
       cursor: pointer;
+    }
+    .quantity input {
+      width: 40px;
+      text-align: center;
+      font-size: 1em;
+      border: none;
+      background: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    #finalize {
+      text-align: center;
+      margin: 30px 0;
+    }
+    #finalize button {
+      padding: 12px 30px;
+      font-size: 1.1em;
+      background-color: #5d3a1a;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    #free-water {
+      text-align: center;
+      color: green;
       font-weight: bold;
-      transition: 0.3s;
+      margin-bottom: 20px;
     }
 
-    .language-switcher button:hover {
-      background: #00ffe0;
-      color: #000;
+    #thankYou {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    #thankYou h2 { color: #5d3a1a; }
+
+    #invoice {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    h1, p {
-      opacity: 0;
-      animation: fadeIn 1.5s ease-out forwards;
-      text-shadow: 0 0 15px #00ffe0, 0 0 25px #00c3ff;
-      z-index: 2;
-    }
-
-    h1 { font-size: 2.6em; animation-delay: 0.3s; }
-    p {
-      font-size: 1.3em;
-      margin-top: 15px;
-      color: #dddddd;
-      text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-      animation-delay: 1s;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .emoji {
-      position: absolute;
-      font-size: 22px;
-      animation: floatUp ease-in forwards;
-      pointer-events: none;
-      opacity: 0.85;
-      filter: drop-shadow(0 0 4px white);
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      p { font-size: 1em; }
-      .language-switcher { top: 10px; left: 10px; }
+    footer {
+      background: #5d3a1a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
-  <div class="language-switcher">
-    <button onclick="switchLanguage('ar')">العربية</button>
-    <button onclick="switchLanguage('fr')">Français</button>
-    <button onclick="switchLanguage('en')">English</button>
-    <button onclick="switchLanguage('tr')">Türkçe</button>
-    <button onclick="switchLanguage('es')">Español</button>
+  <header>
+    <h1>☕ مقهى نورسين</h1>
+    <p>اختر منتجاتك وسنوصّلها إلى طاولتك!</p>
+  </header>
+
+  <div id="tableSelect">
+    <label for="table">اختر رقم الطاولة:</label>
+    <select id="table">
+      <option disabled selected>اختر طاولة</option>
+      <script>
+        for (let i = 1; i <= 15; i++) {
+          document.write(`<option value="${i}">${i}</option>`);
+        }
+      </script>
+    </select>
   </div>
 
-  <h1 id="main-text">المبرمج في عطلة حتى 20 جويلية 👨‍💻</h1>
-  <p id="sub-text">🎧 نتمنى لك يومًا شبابيا جميلاً ومليئًا بالطاقة 😎</p>
+  <div id="free-water">💧 إذا تجاوز طلبك 1000DA فالمياه تصبح مجانية!</div>
+
+  <section class="products" id="menu">
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlC5uw4R9KYlSMSUMU3CDulqNx6Yd6-za3eP_zRmP2W2fTX9Ee3tRfM20&s=10" alt="قهوة">
+      <div class="product-content">
+        <h3>قهوة أصيلة</h3>
+        <p>تحميص عربي فاخر</p>
+        <div class="price">60 DA</div>
+        <div class="quantity">
+          <button onclick="changeQty('q-coffee', -1)">-</button>
+          <input type="text" id="q-coffee" value="0" readonly>
+          <button onclick="changeQty('q-coffee', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCiP8lHR6V3abm4tMBNgFPu7dEHAN8aPeXzHgII4FXsQmClJdQnUEvlxg&s=10" alt="حليب">
+      <div class="product-content">
+        <h3>حليب ساخن</h3>
+        <p>مع لمسة فانيليا</p>
+        <div class="price">60 DA</div>
+        <div class="quantity">
+          <button onclick="changeQty('q-milk', -1)">-</button>
+          <input type="text" id="q-milk" value="0" readonly>
+          <button onclick="changeQty('q-milk', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6vd5tOa1DXeo01E-xVxvUQo1yc9hM6QBBv2kkLhzY7H473DVFe5Xt2FE&s=10" alt="زنجبيل">
+      <div class="product-content">
+        <h3>مشروب الزنجبيل</h3>
+        <p>شراب دافئ بطابع تقليدي</p>
+        <div class="price">60 DA</div>
+        <div class="quantity">
+          <button onclick="changeQty('q-ginger', -1)">-</button>
+          <input type="text" id="q-ginger" value="0" readonly>
+          <button onclick="changeQty('q-ginger', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaK5n1zRWeDCvxNjffBcOOfjeiHQQt6ivStAXMkj_cypKgFFQhB89Z_Gg&s=10" alt="حلويات">
+      <div class="product-content">
+        <h3>حلويات تقليدية</h3>
+        <p>كعك، غريبة، مقروط...</p>
+        <div class="price">100 DA</div>
+        <div class="quantity">
+          <button onclick="changeQty('q-sweets', -1)">-</button>
+          <input type="text" id="q-sweets" value="0" readonly>
+          <button onclick="changeQty('q-sweets', 1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvURwBDTddQ4e-cVk6BvdmB3bYhYQozd9sLf6JONryUlPrrU-XujeDKwXE&s=10" alt="مياه">
+      <div class="product-content">
+        <h3>مياه معدنية</h3>
+        <p>باردة ومنعشة</p>
+        <div class="price">35 DA</div>
+        <div class="quantity">
+          <button onclick="changeQty('q-water', -1)">-</button>
+          <input type="text" id="q-water" value="0" readonly>
+          <button onclick="changeQty('q-water', 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="finalize">
+    <button onclick="finalizeOrder()">إنهاء الطلب</button>
+  </div>
+
+  <section id="thankYou">
+    <h2>✅ تم استلام طلبك بنجاح!</h2>
+    <p>سيتم إيصال طلبك إلى طاولتك في أسرع وقت.</p>
+    <div id="invoice"></div>
+  </section>
+
+  <footer>
+    جميع الحقوق محفوظة &copy; 2025 - مقهى نورسين
+  </footer>
 
   <script>
-    const translations = {
-      ar: {
-        title: "المبرمج في عطلة حتى 20 جويلية 👨‍💻",
-        message: "🎧 نتمنى لك يومًا شبابيا جميلاً ومليئًا بالطاقة 😎",
-        dir: "rtl",
-        lang: "ar"
-      },
-      fr: {
-        title: "Le programmeur est en vacances jusqu'au 20 juillet 👨‍💻",
-        message: "🎧 Passez une journée pleine d’énergie et de jeunesse 😎",
-        dir: "ltr",
-        lang: "fr"
-      },
-      en: {
-        title: "The programmer is on vacation until July 20 👨‍💻",
-        message: "🎧 Wishing you a youthful and energetic day 😎",
-        dir: "ltr",
-        lang: "en"
-      },
-      tr: {
-        title: "Yazılımcı 20 Temmuz'a kadar tatilde 👨‍💻",
-        message: "🎧 Genç ve enerjik bir gün geçirmeni dileriz 😎",
-        dir: "ltr",
-        lang: "tr"
-      },
-      es: {
-        title: "El programador está de vacaciones hasta el 20 de julio 👨‍💻",
-        message: "🎧 ¡Que tengas un día lleno de juventud y energía! 😎",
-        dir: "ltr",
-        lang: "es"
+    function changeQty(id, delta) {
+      const input = document.getElementById(id);
+      let value = parseInt(input.value);
+      value += delta;
+      if (value < 0) value = 0;
+      input.value = value;
+    }
+
+    function finalizeOrder() {
+      const table = document.getElementById('table').value;
+      if (!table || isNaN(table)) {
+        alert('يرجى اختيار رقم الطاولة.');
+        return;
       }
-    };
 
-    function switchLanguage(lang) {
-      const t = translations[lang];
-      document.getElementById('main-text').textContent = t.title;
-      document.getElementById('sub-text').textContent = t.message;
-      document.documentElement.lang = t.lang;
-      document.documentElement.dir = t.dir;
+      const products = [
+        { name: 'قهوة أصيلة', price: 60, qtyId: 'q-coffee' },
+        { name: 'حليب ساخن', price: 60, qtyId: 'q-milk' },
+        { name: 'مشروب الزنجبيل', price: 60, qtyId: 'q-ginger' },
+        { name: 'حلويات تقليدية', price: 100, qtyId: 'q-sweets' },
+        { name: 'مياه معدنية', price: 35, qtyId: 'q-water' },
+      ];
+
+      const order = [];
+      let tempTotal = 0;
+
+      // حساب المجموع قبل احتساب خصم المياه
+      products.forEach(product => {
+        const qty = parseInt(document.getElementById(product.qtyId).value);
+        if (qty > 0) {
+          tempTotal += product.price * qty;
+          order.push({ item: product.name, price: product.price, qty });
+        }
+      });
+
+      if (order.length === 0) {
+        alert('يرجى اختيار كمية واحدة على الأقل.');
+        return;
+      }
+
+      document.getElementById('menu').style.display = 'none';
+      document.getElementById('tableSelect').style.display = 'none';
+      document.getElementById('finalize').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+
+      let invoiceHTML = `<h3>رقم الطاولة: ${table}</h3><ul style='list-style:none;padding:0;'>`;
+      let total = 0;
+
+      order.forEach(item => {
+        if (item.item === 'مياه معدنية' && tempTotal >= 1000) {
+          invoiceHTML += `<li>🟤 ${item.item} × ${item.qty} = 0 DA (مجانية)</li>`;
+        } else {
+          let subtotal = item.price * item.qty;
+          invoiceHTML += `<li>🟤 ${item.item} × ${item.qty} = ${subtotal} DA</li>`;
+          total += subtotal;
+        }
+      });
+
+      if (tempTotal >= 1000) {
+        invoiceHTML += `<li>💧 مياه معدنية مجانية لأن طلبك تجاوز 1000DA</li>`;
+      } else {
+        total = tempTotal;
+      }
+
+      invoiceHTML += `</ul><hr><strong>المجموع: ${total} DA</strong>`;
+      document.getElementById('invoice').innerHTML = invoiceHTML;
     }
-
-    const emojis = ["😎", "🎧", "🚀", "🔥", "🧠", "💻", "☀️"];
-    function createEmoji() {
-      const emoji = document.createElement("div");
-      emoji.classList.add("emoji");
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      emoji.style.left = Math.random() * 100 + "vw";
-      emoji.style.bottom = "0px";
-      emoji.style.fontSize = (Math.random() * 10 + 20) + "px";
-      emoji.style.animationDuration = (Math.random() * 2 + 4) + "s";
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 6000);
-    }
-
-    setInterval(createEmoji, 400);
   </script>
 </body>
 </html>
