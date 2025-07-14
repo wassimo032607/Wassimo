@@ -133,7 +133,7 @@
     <p>اختر منتجاتك وسنوصّلها إلى طاولتك!</p>
   </header>
 
-  <div id="free-water">💧 إذا تجاوز طلبك 1000DA فالمياه تصبح مجانية!</div>
+  <div id="free-water">💧 إذا تجاوز طلبك 2000DA فالمياه تصبح مجانية!</div>
 
   <section class="products" id="menu">
     <!-- المنتجات -->
@@ -278,7 +278,7 @@
       let total = 0;
 
       order.forEach(item => {
-        if (item.item === 'مياه معدنية' && tempTotal >= 1000) {
+        if (item.item === 'مياه معدنية' && tempTotal >= 2000) {
           invoiceHTML += `<li>🟤 ${item.item} × ${item.qty} = 0 DA (مجانية)</li>`;
         } else {
           let subtotal = item.price * item.qty;
@@ -287,8 +287,8 @@
         }
       });
 
-      if (tempTotal >= 1000) {
-        invoiceHTML += `<li>💧 مياه معدنية مجانية لأن طلبك تجاوز 1000DA</li>`;
+      if (tempTotal >= 2000) {
+        invoiceHTML += `<li>💧 مياه معدنية مجانية لأن طلبك تجاوز 2000DA</li>`;
       } else {
         total = tempTotal;
       }
