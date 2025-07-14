@@ -224,6 +224,9 @@
     <h2>✅ تم استلام طلبك بنجاح!</h2>
     <p>سيتم إيصال طلبك إلى طاولتك في أسرع وقت.</p>
     <div id="invoice"></div>
+    <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 25px; background-color: #8B4513; color: white; border: none; border-radius: 25px; cursor: pointer;">
+  🔙 الرجوع إلى القائمة
+    </button>
   </section>
 
   <footer>
@@ -296,9 +299,6 @@
       invoiceHTML += `</ul><hr><strong>المجموع: ${total} DA</strong>`;
       document.getElementById('invoice').innerHTML = invoiceHTML;
     }
-    <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 25px; background-color: #8B4513; color: white; border: none; border-radius: 25px; cursor: pointer;">
-  🔙 الرجوع إلى القائمة
-</button>
   </script>
 </body>
 </html>
